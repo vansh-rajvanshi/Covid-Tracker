@@ -1,0 +1,5 @@
+com\covid\app\CovidApp\Service\CovidDataFetch.class
+com\covid\app\CovidApp\Controller\controller.class
+com\covid\app\CovidApp\Config\configration.class
+com\covid\app\CovidApp\CovidAppApplication.class
+com\covid\app\CovidApp\utility\util.class

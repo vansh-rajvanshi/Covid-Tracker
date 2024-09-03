@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Covid-19 Data</title>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>Covid-19 Data</h1>
+        </div>
+    </nav>
+    <section class="hero">
+        <div class="container">
+            <h2>Get Covid-19 Active cases data of any city</h2>
+            <div class="input-container">
+                <input type="text" id="state" placeholder="Enter State"><br>
+                <input type="text" id="city" placeholder="Enter city"><br>
+                <button onclick="getCovid()">Get Data</button>
+            </div>
+            <div id="result"></div>
+        </div>
+    </section>
+    <script>
+        function getCovid(){
+            var statedata=document.getElementById("state").value;
+            var citydata=document.getElementById("city").value;
+            fetch(`http://localhost:8080/covid-data/citywise/${statedata}/${citydata}`)
+            .then((Response)=>{
+                if(!Response.ok){
+                    throw new Error("Network Response was not Ok");
+                }
+                return Response.text();
+            })
+            .then((data)=>{
+                var resultDiv=document.getElementById("result");
+                var message=`${data}`;
+                resultDiv.innerHTML=`<p>${message}</p>`;
+            })
+            .catch((error)=>{
+                console.error("Error fetching data: ",error);
+                document.getElementById("result").innerHTML="<p> Error Fetching data Please try again</p>";
+            });
+        }
+    </script>
+</body>
+</html>
